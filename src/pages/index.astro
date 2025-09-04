@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import MushroomSVG from '../components/MushroomSVG.astro';
+---
+
+<Layout title="Яблунівський виробничий комплекс - Екотуризм та органічні продукти">
+  <Navigation />
+  
+  <!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background with parallax effect -->
+    <div class="absolute inset-0 hero-gradient"></div>
+    <div class="absolute inset-0 leaf-pattern opacity-20"></div>
+    
+    <!-- Floating elements -->
+    <div class="absolute top-20 left-10 w-16 h-16 mushroom-animation opacity-20">
+      <MushroomSVG size="64" />
+    </div>
+    <div class="absolute bottom-20 right-10 text-6xl nut-animation opacity-20">🌰</div>
+    <div class="absolute top-1/3 right-20 text-4xl animate-float-delay opacity-15">🌿</div>
+    <div class="absolute bottom-1/3 left-20 text-5xl animate-pulse-slow opacity-15">🌳</div>
+    
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 animate-fade-in text-shadow-eco">
+        Екологічний рай<br>
+        <span class="text-eco-mint">у серці Київщини</span>
+      </h1>
+      <p class="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto mb-12 animate-slide-up">
+        Наше підприємство вирощує печериці та фундук за власною технологією в екологічно-чистому районі. 
+        Активно розвиваємо туризм та відпочинок!
+      </p>
+      
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+        <a href="/shop" class="group relative px-8 py-4 bg-white text-eco-dark rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+          <span class="relative z-10"><i class="fas fa-shopping-basket mr-2"></i>Інтернет-магазин</span>
+          <div class="absolute inset-0 bg-gradient-to-r from-eco-light to-eco-sage transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+        </a>
+        <a href="/tourism" class="group relative px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-eco-dark transition-all duration-300">
+          <i class="fas fa-leaf mr-2"></i>Туризм
+        </a>
+      </div>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <i class="fas fa-chevron-down text-white text-2xl"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo section showing mushroom component -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-eco-dark mb-8">Астра міграція в процесі! 🚀</h2>
+      <p class="text-xl text-gray-600 mb-8">Тестуємо нові компоненти:</p>
+      
+      <div class="flex justify-center items-center gap-8">
+        <MushroomSVG size="80" className="hover-lift" />
+        <MushroomSVG size="60" className="hover-lift" />
+        <MushroomSVG size="100" className="hover-lift" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-eco-dark py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center text-white/60">
+        <p>&copy; 2024 Яблунівський виробничий комплекс. Всі права захищені.</p>
+        <p class="mt-2 flex items-center justify-center">
+          <span>Підтримуємо Україну</span>
+          <span class="ml-2">💙💛</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    
+    if (window.scrollY > 100) {
+      navbar?.classList.add('shadow-lg');
+    } else {
+      navbar?.classList.remove('shadow-lg');
+    }
+  });
+
+  // Animation on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements
+  document.querySelectorAll('.hover-lift').forEach(el => {
+    observer.observe(el);
+  });
+</script></Layout>

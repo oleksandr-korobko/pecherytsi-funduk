@@ -1,0 +1,75 @@
+---
+// No props needed for now
+---
+
+<!-- Navigation -->
+<nav class="fixed w-full z-50 glass-effect border-b border-eco-light/20 transition-all duration-300" id="navbar">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-gradient-to-br from-eco-light to-eco-dark rounded-full flex items-center justify-center">
+          <span class="text-2xl">🌰</span>
+        </div>
+        <div>
+          <h1 class="font-bold text-eco-dark text-lg">Яблунівський</h1>
+          <p class="text-xs text-eco-brown -mt-1">виробничий комплекс</p>
+        </div>
+      </div>
+      
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="/" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Головна</a>
+        <a href="/about" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Про нас</a>
+        <a href="/shop" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Магазин</a>
+        <a href="/tourism" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Туризм</a>
+        <a href="/excursions" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Екскурсії</a>
+        <a href="/masters" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Майстер-класи</a>
+        <a href="/events" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Події</a>
+        <a href="/contact" class="text-eco-dark hover:text-eco-light transition-colors font-medium">Контакти</a>
+      </div>
+      
+      <!-- CTA Button -->
+      <div class="hidden lg:block">
+        <a href="tel:+380677340909" class="bg-gradient-to-r from-eco-light to-eco-sage text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 font-semibold">
+          <i class="fas fa-phone mr-2"></i>Забронювати
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden text-eco-dark" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-3/4 h-full bg-white shadow-2xl lg:hidden">
+    <div class="p-6">
+      <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-eco-dark">
+        <i class="fas fa-times text-2xl"></i>
+      </button>
+      <div class="mt-8 space-y-4">
+        <a href="/" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Головна</a>
+        <a href="/about" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Про нас</a>
+        <a href="/shop" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Магазин</a>
+        <a href="/tourism" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Туризм</a>
+        <a href="/excursions" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Екскурсії</a>
+        <a href="/masters" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Майстер-класи</a>
+        <a href="/events" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Події</a>
+        <a href="/contact" class="block text-eco-dark hover:text-eco-light transition-colors font-medium py-2">Контакти</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile Menu Toggle
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu?.classList.toggle('active');
+  }
+
+  // Make function available globally
+  (window as any).toggleMobileMenu = toggleMobileMenu;
+</script>
