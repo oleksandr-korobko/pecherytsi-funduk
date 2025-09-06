@@ -63,13 +63,12 @@
   </div>
 </nav>
 
-<script>
-  // Mobile Menu Toggle
-  function toggleMobileMenu() {
+<script is:inline>
+  // Mobile Menu Toggle - делаем функцию глобальной
+  window.toggleMobileMenu = function() {
     const menu = document.getElementById('mobileMenu');
-    menu?.classList.toggle('active');
+    if (menu) {
+      menu.classList.toggle('active');
+    }
   }
-
-  // Make function available globally
-  (window as any).toggleMobileMenu = toggleMobileMenu;
 </script>

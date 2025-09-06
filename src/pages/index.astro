@@ -78,34 +78,36 @@ import MushroomSVG from '../components/MushroomSVG.astro';
   </footer>
 </Layout>
 
-<script>
+<script is:inline>
   // Navbar scroll effect
   window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     
     if (window.scrollY > 100) {
-      navbar?.classList.add('shadow-lg');
+      if (navbar) navbar.classList.add('shadow-lg');
     } else {
-      navbar?.classList.remove('shadow-lg');
+      if (navbar) navbar.classList.remove('shadow-lg');
     }
   });
 
   // Animation on scroll
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fade-in');
-      }
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.hover-lift').forEach(el => {
+      observer.observe(el);
     });
-  }, observerOptions);
-
-  // Observe elements
-  document.querySelectorAll('.hover-lift').forEach(el => {
-    observer.observe(el);
   });
 </script></Layout>
