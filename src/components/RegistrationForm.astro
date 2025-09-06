@@ -1,0 +1,164 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  events?: Array<{value: string, label: string}>;
+  showNewsletter?: boolean;
+  className?: string;
+}
+
+const { 
+  title = "Реєстрація на заходи",
+  subtitle = "Заповніть форму для участі у наших заходах",
+  events = [
+    { value: "excursion", label: "Групова екскурсія" },
+    { value: "pottery", label: "Майстер-клас з гончарства" },
+    { value: "phyto", label: "Фіто церемонія" },
+    { value: "yoga", label: "Йога та медитація" }
+  ],
+  showNewsletter = true,
+  className = ''
+} = Astro.props;
+---
+
+<div class={`bg-gradient-to-br from-eco-light/10 to-eco-sage/10 rounded-3xl p-8 ${className}`}>
+  <h3 class="text-2xl font-bold text-eco-dark mb-2 text-center">{title}</h3>
+  {subtitle && (
+    <p class="text-gray-600 mb-6 text-center">{subtitle}</p>
+  )}
+  
+  <form class="max-w-2xl mx-auto space-y-4" onsubmit="handleFormSubmit(event)">
+    <!-- Name and Phone -->
+    <div class="grid md:grid-cols-2 gap-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-eco-dark mb-1">Ваше ім'я *</label>
+        <input 
+          type="text" 
+          id="name"
+          name="name"
+          required
+          placeholder="Введіть ваше ім'я" 
+          class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20"
+        >
+      </div>
+      <div>
+        <label for="phone" class="block text-sm font-medium text-eco-dark mb-1">Телефон *</label>
+        <input 
+          type="tel" 
+          id="phone"
+          name="phone"
+          required
+          placeholder="+38 (0__) ___-__-__" 
+          class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20"
+        >
+      </div>
+    </div>
+    
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-eco-dark mb-1">Email *</label>
+      <input 
+        type="email" 
+        id="email"
+        name="email"
+        required
+        placeholder="example@email.com" 
+        class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20"
+      >
+    </div>
+    
+    <!-- Event Selection -->
+    <div>
+      <label for="event" class="block text-sm font-medium text-eco-dark mb-1">Оберіть захід *</label>
+      <select 
+        id="event"
+        name="event"
+        required
+        class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20"
+      >
+        <option value="">Оберіть захід</option>
+        {events.map(event => (
+          <option value={event.value}>{event.label}</option>
+        ))}
+      </select>
+    </div>
+    
+    <!-- Date Preference -->
+    <div>
+      <label for="date" class="block text-sm font-medium text-eco-dark mb-1">Бажана дата</label>
+      <input 
+        type="date" 
+        id="date"
+        name="date"
+        class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20"
+      >
+    </div>
+    
+    <!-- Additional Comments -->
+    <div>
+      <label for="comments" class="block text-sm font-medium text-eco-dark mb-1">Додаткові побажання</label>
+      <textarea 
+        id="comments"
+        name="comments"
+        rows="3"
+        placeholder="Розкажіть про ваші очікування або особливі потреби..."
+        class="w-full px-4 py-3 rounded-xl border border-eco-light/30 focus:outline-none focus:border-eco-light focus:ring-2 focus:ring-eco-light/20 resize-none"
+      ></textarea>
+    </div>
+    
+    <!-- Newsletter Subscription -->
+    {showNewsletter && (
+      <div class="flex items-start space-x-3">
+        <input 
+          type="checkbox" 
+          id="newsletter" 
+          name="newsletter"
+          class="w-4 h-4 text-eco-light border-eco-light/30 rounded focus:ring-eco-light/20"
+        >
+        <label for="newsletter" class="text-sm text-gray-600 leading-relaxed">
+          Хочу отримувати новини про майбутні події та спеціальні пропозиції
+        </label>
+      </div>
+    )}
+    
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="w-full bg-gradient-to-r from-eco-light to-eco-sage text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+      id="submitBtn"
+    >
+      <span id="submitText">Зареєструватися</span>
+      <i id="submitLoader" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+    </button>
+  </form>
+</div>
+
+<script is:inline>
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    // Get form elements
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitLoader = document.getElementById('submitLoader');
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitText.textContent = 'Реєструємо...';
+    submitLoader.classList.remove('hidden');
+    
+    // Simulate form submission (replace with actual API call)
+    setTimeout(() => {
+      // Reset button state
+      submitBtn.disabled = false;
+      submitText.textContent = 'Зареєструватися';
+      submitLoader.classList.add('hidden');
+      
+      // Show success message
+      alert('Дякуємо за реєстрацію! Ми зв\'яжемося з вами найближчим часом.');
+      
+      // Reset form
+      event.target.reset();
+    }, 2000);
+  }
+</script>

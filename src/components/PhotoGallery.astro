@@ -1,0 +1,93 @@
+---
+export interface Props {
+  images?: Array<{
+    src?: string;
+    alt: string;
+    icon?: string;
+    mushroomIcon?: boolean;
+    gradient: {from: string, to: string};
+    link?: string;
+  }>;
+  columns?: 2 | 3 | 4;
+  gap?: 2 | 4 | 6 | 8;
+  className?: string;
+}
+
+const { 
+  images = [
+    { alt: "Ліс", icon: "🌳", gradient: {from: "eco-light", to: "eco-sage"} },
+    { alt: "Горіхи", icon: "🌰", gradient: {from: "eco-brown", to: "eco-dark"} },
+    { alt: "Печериці", mushroomIcon: true, gradient: {from: "eco-sage", to: "eco-mint"} },
+    { alt: "Відпочинок", icon: "🏕️", gradient: {from: "eco-light", to: "eco-dark"} }
+  ],
+  columns = 4,
+  gap = 4,
+  className = ''
+} = Astro.props;
+
+const columnsClass = {
+  2: 'grid-cols-2',
+  3: 'grid-cols-2 md:grid-cols-3',
+  4: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+}[columns];
+
+const gapClass = `gap-${gap}`;
+---
+
+<div class={`grid ${columnsClass} ${gapClass} ${className}`}>
+  {images.map((image, index) => (
+    <div class={`aspect-square bg-gradient-to-br from-${image.gradient.from} to-${image.gradient.to} rounded-2xl hover-lift flex items-center justify-center text-white text-6xl cursor-pointer group overflow-hidden relative`}>
+      
+      {/* Overlay for hover effect */}
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 z-10"></div>
+      
+      {/* Image or Icon */}
+      {image.src ? (
+        <img 
+          src={image.src} 
+          alt={image.alt}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      ) : image.mushroomIcon ? (
+        <MushroomSVG size="80" className="group-hover:scale-110 transition-transform duration-300 relative z-20" />
+      ) : (
+        <span class="group-hover:scale-110 transition-transform duration-300 relative z-20">
+          {image.icon}
+        </span>
+      )}
+      
+      {/* Hover overlay with title */}
+      <div class="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+        <div class="bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-t-xl text-sm font-semibold mb-4">
+          {image.alt}
+        </div>
+      </div>
+      
+      {/* Click handler for links */}
+      {image.link && (
+        <a 
+          href={image.link}
+          class="absolute inset-0 z-30"
+          aria-label={`Переглянути ${image.alt}`}
+        ></a>
+      )}
+    </div>
+  ))}
+</div>
+
+{/* Lightbox functionality for future enhancement */}
+<script is:inline>
+  // Click handlers for gallery items
+  document.querySelectorAll('[data-gallery-item]').forEach(item => {
+    item.addEventListener('click', function() {
+      const src = this.dataset.src;
+      const alt = this.dataset.alt;
+      
+      if (src) {
+        // Future: implement lightbox modal
+        console.log('Opening lightbox for:', src, alt);
+      }
+    });
+  });
+</script>

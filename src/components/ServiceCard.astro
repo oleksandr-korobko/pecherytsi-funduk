@@ -1,0 +1,91 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  price?: string;
+  priceUnit?: string;
+  details?: Array<{label: string, value: string}>;
+  features?: string[];
+  pricing?: Array<{category: string, price: string}>;
+  buttonText?: string;
+  buttonAction?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+}
+
+const { 
+  icon,
+  title, 
+  description,
+  price,
+  priceUnit = '',
+  details = [],
+  features = [],
+  pricing = [],
+  buttonText = 'Дізнатись більше',
+  buttonAction = '#',
+  gradientFrom = 'eco-light',
+  gradientTo = 'eco-sage'
+} = Astro.props;
+---
+
+<div class="bg-white rounded-2xl p-6 eco-shadow hover-lift">
+  <!-- Icon -->
+  <div class={`w-16 h-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo} rounded-xl flex items-center justify-center text-3xl mb-4`}>
+    {icon}
+  </div>
+
+  <!-- Title and Description -->
+  <h3 class="text-xl font-bold text-eco-dark mb-3">{title}</h3>
+  <p class="text-gray-600 mb-4">{description}</p>
+
+  <!-- Details -->
+  {details.length > 0 && (
+    <div class="space-y-2 mb-4">
+      {details.map(detail => (
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-600">{detail.label}:</span>
+          <span class="font-semibold text-eco-dark">{detail.value}</span>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <!-- Single Price -->
+  {price && (
+    <div class={`bg-${gradientFrom}/10 p-4 rounded-xl mb-4`}>
+      <div class={`text-3xl font-bold text-${gradientFrom} mb-1`}>{price}</div>
+      {priceUnit && <div class="text-sm text-gray-600">{priceUnit}</div>}
+    </div>
+  )}
+
+  <!-- Multiple Pricing -->
+  {pricing.length > 0 && (
+    <div class="space-y-2 mb-4">
+      {pricing.map(item => (
+        <div class={`bg-${gradientFrom}/10 px-3 py-2 rounded-lg flex justify-between`}>
+          <span>{item.category}</span>
+          <span class={`font-bold text-${gradientFrom}`}>{item.price}</span>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <!-- Features List -->
+  {features.length > 0 && (
+    <ul class="space-y-2 text-sm text-gray-600 mb-4">
+      {features.map(feature => (
+        <li><i class={`fas fa-check text-${gradientFrom} mr-2`}></i>{feature}</li>
+      ))}
+    </ul>
+  )}
+
+  <!-- Action Button -->
+  <button 
+    class={`w-full mt-4 bg-gradient-to-r from-${gradientFrom} to-${gradientTo} text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all`}
+    onclick={buttonAction.startsWith('#') ? `window.location.href='${buttonAction}'` : buttonAction}
+  >
+    {buttonText}
+  </button>
+</div>

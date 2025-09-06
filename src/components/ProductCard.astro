@@ -1,0 +1,75 @@
+---
+export interface Props {
+  icon?: string;
+  mushroomIcon?: boolean;
+  title: string;
+  description: string;
+  price?: string;
+  originalPrice?: string;
+  buttonText?: string;
+  buttonAction?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+  badge?: string;
+}
+
+const { 
+  icon,
+  mushroomIcon = false,
+  title, 
+  description,
+  price,
+  originalPrice,
+  buttonText = 'Замовити',
+  buttonAction = '#',
+  gradientFrom = 'eco-light',
+  gradientTo = 'eco-sage',
+  badge
+} = Astro.props;
+---
+
+<div class="group relative overflow-hidden rounded-3xl eco-shadow hover-lift cursor-pointer">
+  <!-- Badge -->
+  {badge && (
+    <div class="absolute top-4 left-4 z-30 bg-eco-light text-white px-3 py-1 rounded-full text-sm font-semibold">
+      {badge}
+    </div>
+  )}
+  
+  <!-- Background Gradient -->
+  <div class={`absolute inset-0 bg-gradient-to-br from-${gradientFrom}/90 to-${gradientTo}/90 z-10`}></div>
+  
+  <!-- Content -->
+  <div class="relative z-20 p-8 text-white">
+    <!-- Icon -->
+    <div class="text-6xl mb-4">
+      {mushroomIcon ? (
+        <MushroomSVG size="64" className="mx-auto" />
+      ) : (
+        <span>{icon}</span>
+      )}
+    </div>
+    
+    <!-- Title and Description -->
+    <h3 class="text-2xl font-bold mb-2">{title}</h3>
+    <p class="mb-4 opacity-90">{description}</p>
+    
+    <!-- Pricing -->
+    {price && (
+      <div class="mb-4">
+        <span class="text-2xl font-bold">{price}</span>
+        {originalPrice && (
+          <span class="ml-2 text-lg line-through opacity-60">{originalPrice}</span>
+        )}
+      </div>
+    )}
+    
+    <!-- Action Button -->
+    <button 
+      class="bg-white text-eco-dark px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all"
+      onclick={buttonAction.startsWith('#') ? `window.location.href='${buttonAction}'` : buttonAction}
+    >
+      {buttonText}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+---
+export interface Props {
+  showAfter?: number;
+  position?: 'bottom-right' | 'bottom-left' | 'bottom-center';
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+const { 
+  showAfter = 300,
+  position = 'bottom-right',
+  variant = 'primary',
+  size = 'md',
+  className = ''
+} = Astro.props;
+
+const positions = {
+  'bottom-right': 'bottom-8 right-8',
+  'bottom-left': 'bottom-8 left-8', 
+  'bottom-center': 'bottom-8 left-1/2 transform -translate-x-1/2'
+};
+
+const variants = {
+  primary: 'bg-eco-light hover:bg-eco-dark',
+  secondary: 'bg-eco-sage hover:bg-eco-light'
+};
+
+const sizes = {
+  sm: 'w-10 h-10',
+  md: 'w-12 h-12',
+  lg: 'w-14 h-14'
+};
+
+const positionClass = positions[position];
+const variantClass = variants[variant];
+const sizeClass = sizes[size];
+---
+
+<button 
+  id="backToTop" 
+  onclick="scrollToTop()"
+  class={`fixed ${positionClass} ${sizeClass} ${variantClass} text-white rounded-full shadow-lg transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110 ${className}`}
+  aria-label="Повернутися до верху"
+>
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script is:inline define:vars={{ showAfter }}>
+  // Show/hide back to top button based on scroll position
+  function updateBackToTopVisibility() {
+    const backToTop = document.getElementById('backToTop');
+    if (!backToTop) return;
+    
+    if (window.scrollY > showAfter) {
+      backToTop.classList.remove('opacity-0', 'pointer-events-none');
+      backToTop.classList.add('opacity-100');
+    } else {
+      backToTop.classList.add('opacity-0', 'pointer-events-none');
+      backToTop.classList.remove('opacity-100');
+    }
+  }
+
+  // Smooth scroll to top function
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Make scrollToTop globally available
+  window.scrollToTop = scrollToTop;
+
+  // Listen for scroll events
+  window.addEventListener('scroll', updateBackToTopVisibility);
+  
+  // Initial check
+  document.addEventListener('DOMContentLoaded', updateBackToTopVisibility);
+</script>

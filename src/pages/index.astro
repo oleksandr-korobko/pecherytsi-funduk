@@ -1,11 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import MushroomSVG from '../components/MushroomSVG.astro';
 ---
 
-<Layout title="Яблунівський виробничий комплекс - Екотуризм та органічні продукти">
-  <Navigation />
+<BaseLayout title="Яблунівський виробничий комплекс - Екотуризм та органічні продукти">
   
   <!-- Hero Section -->
   <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -551,110 +549,31 @@ import MushroomSVG from '../components/MushroomSVG.astro';
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-eco-dark py-8">
-    <div class="container mx-auto px-4">
-      <div class="text-center text-white/60">
-        <p>&copy; 2024 Яблунівський виробничий комплекс. Всі права захищені.</p>
-        <p class="mt-2 flex items-center justify-center">
-          <span>Підтримуємо Україну</span>
-          <span class="ml-2">💙💛</span>
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-eco-light text-white rounded-full shadow-lg hover:bg-eco-dark transition-all duration-300 opacity-0 pointer-events-none">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-</Layout>
+</BaseLayout>
 
 <script is:inline>
-  // Mobile Menu Toggle
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    if (menu) {
-      menu.classList.toggle('active');
-    }
-  }
-
-  // Navbar scroll effect
-  window.addEventListener('scroll', function() {
-    const navbar = document.getElementById('navbar');
-    const backToTop = document.getElementById('backToTop');
-    
-    if (window.scrollY > 100) {
-      if (navbar) navbar.classList.add('shadow-lg');
-      if (backToTop) {
-        backToTop.classList.remove('opacity-0', 'pointer-events-none');
-        backToTop.classList.add('opacity-100');
-      }
-    } else {
-      if (navbar) navbar.classList.remove('shadow-lg');
-      if (backToTop) {
-        backToTop.classList.add('opacity-0', 'pointer-events-none');
-        backToTop.classList.remove('opacity-100');
-      }
-    }
-  });
-
-  // Smooth scroll to top
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-
-  // Add click handler for back to top button
+  // Page-specific JavaScript for form handling and animations
   document.addEventListener('DOMContentLoaded', function() {
-    const backToTop = document.getElementById('backToTop');
-    if (backToTop) {
-      backToTop.addEventListener('click', scrollToTop);
-    }
-  });
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-        // Close mobile menu if open
-        const mobileMenu = document.getElementById('mobileMenu');
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-          mobileMenu.classList.remove('active');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
         }
-      }
+      });
+    }, observerOptions);
+
+    // Observe elements for animations
+    document.querySelectorAll('.hover-lift').forEach(el => {
+      observer.observe(el);
     });
-  });
 
-  // Animation on scroll
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fade-in');
-      }
-    });
-  }, observerOptions);
-
-  // Observe elements
-  document.querySelectorAll('.hover-lift').forEach(el => {
-    observer.observe(el);
-  });
-
-  // Form submission handler
-  document.addEventListener('DOMContentLoaded', function() {
+    // Form submission handler
     const form = document.querySelector('form');
     if (form) {
       form.addEventListener('submit', function(e) {

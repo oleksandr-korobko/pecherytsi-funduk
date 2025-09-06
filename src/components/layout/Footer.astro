@@ -1,0 +1,114 @@
+---
+import ContactInfo from '../ContactInfo.astro';
+
+export interface Props {
+  variant?: 'default' | 'minimal' | 'extended';
+  showContactInfo?: boolean;
+  showSocialLinks?: boolean;
+  showCompanyInfo?: boolean;
+  className?: string;
+}
+
+const { 
+  variant = 'default',
+  showContactInfo = false,
+  showSocialLinks = true,
+  showCompanyInfo = true,
+  className = ''
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class={`bg-eco-dark py-8 ${className}`}>
+  <div class="container mx-auto px-4">
+    
+    {/* Extended Footer Content */}
+    {variant === 'extended' && (
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        
+        {/* Company Info */}
+        <div class="text-white">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-eco-light to-eco-mint rounded-full flex items-center justify-center">
+              <span class="text-2xl">🌰</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Яблунівський</h3>
+              <p class="text-sm text-white/70">виробничий комплекс</p>
+            </div>
+          </div>
+          <p class="text-white/80 text-sm leading-relaxed">
+            Екологічний рай у серці Київщини. Вирощуємо печериці та фундук за власною технологією, розвиваємо туризм та відпочинок.
+          </p>
+        </div>
+        
+        {/* Quick Links */}
+        <div class="text-white">
+          <h4 class="font-semibold mb-4 text-eco-mint">Швидкі посилання</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#about" class="text-white/80 hover:text-eco-mint transition-colors">Про нас</a></li>
+            <li><a href="#shop" class="text-white/80 hover:text-eco-mint transition-colors">Магазин</a></li>
+            <li><a href="#tourism" class="text-white/80 hover:text-eco-mint transition-colors">Туризм</a></li>
+            <li><a href="#excursions" class="text-white/80 hover:text-eco-mint transition-colors">Екскурсії</a></li>
+            <li><a href="#masters" class="text-white/80 hover:text-eco-mint transition-colors">Майстер-класи</a></li>
+            <li><a href="#events" class="text-white/80 hover:text-eco-mint transition-colors">Події</a></li>
+          </ul>
+        </div>
+        
+        {/* Contact Info */}
+        {showContactInfo && (
+          <div>
+            <h4 class="font-semibold mb-4 text-eco-mint">Контакти</h4>
+            <ContactInfo variant="dark" layout="vertical" showSocials={false} />
+          </div>
+        )}
+      </div>
+    )}
+    
+    {/* Social Links */}
+    {showSocialLinks && (
+      <div class="flex justify-center space-x-6 mb-6">
+        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors" aria-label="Facebook">
+          <i class="fab fa-facebook-f text-xl text-white"></i>
+        </a>
+        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors" aria-label="Instagram">
+          <i class="fab fa-instagram text-xl text-white"></i>
+        </a>
+        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors" aria-label="Telegram">
+          <i class="fab fa-telegram text-xl text-white"></i>
+        </a>
+        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors" aria-label="TikTok">
+          <i class="fab fa-tiktok text-xl text-white"></i>
+        </a>
+      </div>
+    )}
+    
+    {/* Bottom Section */}
+    <div class="text-center text-white/60 border-t border-white/10 pt-6">
+      {showCompanyInfo && (
+        <div class="space-y-2">
+          <p>&copy; {currentYear} Яблунівський виробничий комплекс. Всі права захищені.</p>
+          <p class="flex items-center justify-center space-x-2">
+            <span>Підтримуємо Україну</span>
+            <span class="text-yellow-400">💙💛</span>
+          </p>
+          {variant === 'extended' && (
+            <div class="flex justify-center space-x-6 mt-4 text-sm">
+              <a href="#" class="hover:text-eco-mint transition-colors">Політика конфіденційності</a>
+              <a href="#" class="hover:text-eco-mint transition-colors">Умови використання</a>
+              <a href="#" class="hover:text-eco-mint transition-colors">Карта сайту</a>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Minimal variant */}
+      {variant === 'minimal' && (
+        <p class="text-sm">
+          © {currentYear} Яблунівський виробничий комплекс
+        </p>
+      )}
+    </div>
+  </div>
+</footer>

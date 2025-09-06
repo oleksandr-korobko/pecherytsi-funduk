@@ -1,0 +1,78 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  description?: string;
+  duration?: string;
+  price?: string;
+  minParticipants?: number;
+  gradientFrom?: string;
+  gradientTo?: string;
+  link?: string;
+  className?: string;
+}
+
+const { 
+  icon,
+  title, 
+  description,
+  duration,
+  price,
+  minParticipants,
+  gradientFrom = 'eco-light',
+  gradientTo = 'eco-sage',
+  link,
+  className = ''
+} = Astro.props;
+
+const Tag = link ? 'a' : 'div';
+---
+
+<Tag
+  href={link}
+  class={`group bg-gradient-to-br from-${gradientFrom}/10 to-${gradientTo}/10 rounded-2xl p-6 text-center hover-lift cursor-pointer transition-all duration-300 hover:shadow-xl ${className}`}
+>
+  <!-- Icon with animation -->
+  <div class="text-4xl mb-3 group-hover:animate-bounce-slow transition-all duration-300 group-hover:scale-110">
+    {icon}
+  </div>
+  
+  <!-- Title -->
+  <h3 class="font-semibold text-eco-dark mb-2 group-hover:text-eco-light transition-colors">
+    {title}
+  </h3>
+  
+  <!-- Description -->
+  {description && (
+    <p class="text-sm text-gray-600 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {description}
+    </p>
+  )}
+  
+  <!-- Details -->
+  {(duration || price || minParticipants) && (
+    <div class="space-y-1 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {duration && (
+        <div class="flex items-center justify-center gap-1">
+          <i class="fas fa-clock"></i>
+          <span>{duration}</span>
+        </div>
+      )}
+      {price && (
+        <div class="flex items-center justify-center gap-1">
+          <i class="fas fa-tag"></i>
+          <span>{price}</span>
+        </div>
+      )}
+      {minParticipants && (
+        <div class="flex items-center justify-center gap-1">
+          <i class="fas fa-users"></i>
+          <span>від {minParticipants} осіб</span>
+        </div>
+      )}
+    </div>
+  )}
+  
+  <!-- Hover overlay -->
+  <div class={`absolute inset-0 bg-gradient-to-br from-${gradientFrom}/5 to-${gradientTo}/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}></div>
+</Tag>

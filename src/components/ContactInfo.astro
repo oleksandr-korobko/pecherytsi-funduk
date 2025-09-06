@@ -1,0 +1,72 @@
+---
+export interface Props {
+  layout?: 'horizontal' | 'vertical';
+  variant?: 'light' | 'dark';
+  showSocials?: boolean;
+  className?: string;
+}
+
+const { 
+  layout = 'vertical',
+  variant = 'light',
+  showSocials = true,
+  className = ''
+} = Astro.props;
+
+const textColor = variant === 'light' ? 'text-eco-dark' : 'text-white';
+const accentColor = variant === 'light' ? 'text-eco-light' : 'text-eco-mint';
+const containerClass = layout === 'horizontal' ? 'grid md:grid-cols-3 gap-6' : 'space-y-6';
+---
+
+<div class={`${containerClass} ${className}`}>
+  <!-- Phone -->
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-eco-light rounded-xl flex items-center justify-center">
+      <i class="fas fa-phone text-white"></i>
+    </div>
+    <div>
+      <p class={`${accentColor} text-sm`}>Телефон для довідок</p>
+      <a href="tel:+380677340909" class={`text-xl font-semibold ${textColor} hover:text-eco-light transition-colors`}>
+        +38 (067) 734-09-09
+      </a>
+    </div>
+  </div>
+  
+  <!-- Location -->
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-eco-light rounded-xl flex items-center justify-center">
+      <i class="fas fa-map-marker-alt text-white"></i>
+    </div>
+    <div>
+      <p class={`${accentColor} text-sm`}>Локація</p>
+      <p class={`text-xl font-semibold ${textColor}`}>49 км від Києва</p>
+      <p class={`text-sm ${textColor}/70`}>Київська область</p>
+    </div>
+  </div>
+  
+  <!-- Working Hours -->
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-eco-light rounded-xl flex items-center justify-center">
+      <i class="fas fa-clock text-white"></i>
+    </div>
+    <div>
+      <p class={`${accentColor} text-sm`}>Режим роботи</p>
+      <p class={`text-xl font-semibold ${textColor}`}>За попереднім записом</p>
+      <p class={`text-sm ${textColor}/70`}>Екскурсії: СБ-НД 12:00</p>
+    </div>
+  </div>
+</div>
+
+{showSocials && (
+  <div class="flex justify-center space-x-6 mt-8">
+    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors">
+      <i class="fab fa-facebook-f text-xl"></i>
+    </a>
+    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors">
+      <i class="fab fa-instagram text-xl"></i>
+    </a>
+    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur rounded-full flex items-center justify-center hover:bg-eco-light transition-colors">
+      <i class="fab fa-telegram text-xl"></i>
+    </a>
+  </div>
+)}
