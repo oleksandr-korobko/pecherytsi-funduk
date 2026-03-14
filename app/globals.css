@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans bg-white text-gray-900;
+  }
+}
+
+@layer utilities {
+  .hero-gradient {
+    background: linear-gradient(135deg, rgba(45, 80, 22, 0.95) 0%, rgba(139, 195, 74, 0.85) 50%, rgba(135, 169, 107, 0.9) 100%);
+  }
+
+  .leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c0 10-5 15-15 15 10 0 15 5 15 15 0-10 5-15 15-15-10 0-15-5-15-15z' fill='%238bc34a' fill-opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .text-shadow-eco {
+    text-shadow: 2px 2px 4px rgba(45, 80, 22, 0.3);
+  }
+}
