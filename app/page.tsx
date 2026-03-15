@@ -1,61 +1,55 @@
 import { getHomePageContent } from '@/lib/content';
-import { PageContainer, MushroomIcon } from '@/components/ui/Layout';
+import { PageContainer, MushroomIcon, HeroSlider } from '@/components/ui/Layout';
 
 export default function HomePage() {
   const content = getHomePageContent();
 
   return (
     <>
-      {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 leaf-pattern opacity-20"></div>
+      {/* Hero Section with Slider */}
+      <section id="home" className="relative">
+        {/* Hero Slider Background */}
+        <HeroSlider />
 
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-16 h-16 animate-float opacity-20">
-          <MushroomIcon size={64} />
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center z-30">
+          <PageContainer className="text-center">
+            <h1 className="text-5xl lg:text-7xl font-bold font-display text-white mb-6 animate-fade-in drop-shadow-2xl">
+              {content.hero.title}
+              <br />
+              <span className="text-eco-mint">{content.hero.subtitle}</span>
+            </h1>
+            <p className="text-xl lg:text-2xl text-white max-w-3xl mx-auto mb-12 animate-slide-up drop-shadow-lg">
+              {content.hero.description}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+              <a
+                href="#shop"
+                className="group relative px-8 py-4 bg-white text-eco-dark rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              >
+                <span className="relative z-10">
+                  <i className="fas fa-shopping-basket mr-2"></i>
+                  {content.hero.ctaButtons.shop}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-eco-light to-eco-sage transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </a>
+              <a
+                href="#tourism"
+                className="group relative px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-eco-dark transition-all duration-300"
+              >
+                <i className="fas fa-leaf mr-2"></i>
+                {content.hero.ctaButtons.tourism}
+              </a>
+            </div>
+          </PageContainer>
         </div>
-        <div className="absolute bottom-20 right-10 text-6xl animate-float-delay opacity-20">🌰</div>
-        <div className="absolute top-1/3 right-20 text-4xl animate-pulse-slow opacity-15">🌿</div>
-        <div className="absolute bottom-1/3 left-20 text-5xl animate-pulse-slow opacity-15">🌳</div>
 
-        {/* Content */}
-        <PageContainer className="relative z-10 text-center">
-          <h1 className="text-5xl lg:text-7xl font-bold font-display text-white mb-6 animate-fade-in text-shadow-eco">
-            {content.hero.title}
-            <br />
-            <span className="text-eco-mint">{content.hero.subtitle}</span>
-          </h1>
-          <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto mb-12 animate-slide-up">
-            {content.hero.description}
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-            <a
-              href="#shop"
-              className="group relative px-8 py-4 bg-white text-eco-dark rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-            >
-              <span className="relative z-10">
-                <i className="fas fa-shopping-basket mr-2"></i>
-                {content.hero.ctaButtons.shop}
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-eco-light to-eco-sage transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </a>
-            <a
-              href="#tourism"
-              className="group relative px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-eco-dark transition-all duration-300"
-            >
-              <i className="fas fa-leaf mr-2"></i>
-              {content.hero.ctaButtons.tourism}
-            </a>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i className="fas fa-chevron-down text-white text-2xl"></i>
-          </div>
-        </PageContainer>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 animate-bounce">
+          <i className="fas fa-chevron-down text-white text-2xl drop-shadow-lg"></i>
+        </div>
       </section>
 
       {/* About Section */}

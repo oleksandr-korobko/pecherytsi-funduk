@@ -34,3 +34,6 @@ next-env.d.ts
 
 # ignore old Astro project
 /pecherytsi-funduk
+
+# temp files
+/temp
