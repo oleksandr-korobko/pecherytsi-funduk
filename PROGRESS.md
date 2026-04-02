@@ -27,8 +27,8 @@
 - ✅ Налаштовано Vercel CLI та авторизацію
 - ✅ Створено `vercel.json` з конфігурацією проекту
 - ✅ Виправлено `next.config.js` (видалено GitHub Pages specific налаштування)
-- ✅ Змінено назву проекту на `yvk` в `package.json`
-- ✅ **Production URL:** https://yvk-red.vercel.app
+- ✅ Змінено назву проекту на `yvk-ua` в `package.json`
+- ✅ **Production URL:** https://yvk-ua.vercel.app
 - ✅ Автоматичний деплой при push на GitHub
 - ✅ Всі стилі Tailwind працюють коректно
 
@@ -59,8 +59,8 @@
 ### 🌐 Deployment URLs
 
 **Production (Vercel):**
-- https://yvk-red.vercel.app - основна адреса
-- Panel: https://vercel.com/oleksandrs-projects-7e418822/yvk
+- https://yvk-ua.vercel.app - основна адреса
+- Panel: https://vercel.com/oleksandrs-projects-7e418822/yvk-ua
 
 **GitHub Pages (застарілий):**
 - https://oleksandr-korobko.github.io/pecherytsi-funduk/ - може показувати старий контент через кешування
