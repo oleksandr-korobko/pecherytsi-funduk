@@ -1,12 +1,73 @@
 # Прогрес проекту ЯВК
 
-**Останнє оновлення:** 2026-03-15
+**Останнє оновлення:** 2026-04-02
 **Гілка:** development
-**Поточний фокус:** Базова версія завершена, планування розширення
+**Поточний фокус:** Hero слайдер + Брендований favicon
 
 ---
 
-## Остання сесія (2026-03-15) - Ініціалізація проекту
+## Остання сесія (2026-04-02) - Hero Слайдер, Favicon та Vercel Deployment
+
+### ✅ Завершено сьогодні
+
+**1. Hero слайдер з реальними фото:**
+- ✅ Компонент `HeroSlider.tsx` (client-side, auto-play, pause on hover)
+- ✅ 6 якісних фотографій виробництва з Google Drive
+- ✅ Smooth transitions з blur placeholders
+- ✅ Навігаційні точки (dots) та стрілки
+- ✅ Responsive дизайн
+- ✅ Темна overlay для читабельності тексту
+
+**2. Брендований favicon:**
+- ✅ SVG favicon з абревіатурою "YVK"
+- ✅ Фірмові кольори (eco-dark + eco-cream)
+- ✅ Додано в metadata (`app/layout.tsx`)
+
+**3. Deployment на Vercel:**
+- ✅ Налаштовано Vercel CLI та авторизацію
+- ✅ Створено `vercel.json` з конфігурацією проекту
+- ✅ Виправлено `next.config.js` (видалено GitHub Pages specific налаштування)
+- ✅ Змінено назву проекту на `yvk` в `package.json`
+- ✅ **Production URL:** https://yvk-red.vercel.app
+- ✅ Автоматичний деплой при push на GitHub
+- ✅ Всі стилі Tailwind працюють коректно
+
+**4. Виправлення проблем:**
+- ❌ GitHub Pages - проблеми з кешуванням (слайдер не відображався)
+- ✅ Vercel - успішний деплой з повним функціоналом
+- ✅ Виправлено конфлікт конфігурацій між GitHub Pages і Vercel
+
+### 📊 Зміни в коді
+
+**Нові файли:**
+- `components/ui/HeroSlider.tsx` - автоматичний слайдер
+- `public/favicon.svg` - брендований favicon
+- `public/images/hero/hero-1.jpg` до `hero-6.jpg` - фото виробництва
+- `vercel.json` - конфігурація Vercel
+
+**Оновлені файли:**
+- `app/page.tsx` - використання `<HeroSlider />`
+- `app/layout.tsx` - додано favicon в metadata
+- `next.config.js` - видалено `output: 'export'` та `basePath` для Vercel
+- `package.json` - змінено назву проекту на `yvk`
+
+**Git commits:**
+- `7b0bc69` - fix(config): налаштування для Vercel
+- `330ae5b` - design(favicon): створено новий favicon з абревіатурою YVK
+- `e00571b` - feat: додано Hero слайдер з реальними фото виробництва
+
+### 🌐 Deployment URLs
+
+**Production (Vercel):**
+- https://yvk-red.vercel.app - основна адреса
+- Panel: https://vercel.com/oleksandrs-projects-7e418822/yvk
+
+**GitHub Pages (застарілий):**
+- https://oleksandr-korobko.github.io/pecherytsi-funduk/ - може показувати старий контент через кешування
+
+---
+
+## Попередня сесія (2026-03-15) - Ініціалізація проекту
 
 ### ✅ Завершено сьогодні
 
@@ -122,11 +183,9 @@ Route (app)                Size     First Load JS
 
 ### 🐛 Відомі проблеми
 
-- ❌ Немає реальних фотографій (placeholder градієнти та емоджі)
 - ❌ Немає mobile navigation (hamburger menu)
 - ❌ Немає форм бронювання (тільки кнопки)
 - ❌ Немає lightbox для галерей
-- ❌ Немає slick slider в Hero
 - ❌ Папка `out/` має свій git репозиторій (gh-pages) - може плутати VS Code
 
 ### 📝 Нотатки
