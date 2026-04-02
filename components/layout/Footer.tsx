@@ -23,28 +23,47 @@ export function Footer({ config }: FooterProps) {
           {/* Social Media */}
           <div>
             <h3 className="text-xl font-bold mb-4 text-eco-mint">Соціальні мережі</h3>
-            <div className="flex space-x-4">
-              {config.instagram && (
-                <a
-                  href={config.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-eco-mint transition-colors"
-                >
-                  Instagram
-                </a>
-              )}
+            <div className="flex space-x-6">
               {config.facebook && (
                 <a
                   href={config.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-eco-mint transition-colors"
+                  className="text-eco-light hover:text-eco-mint transition-all duration-300 hover:scale-110"
+                  aria-label="Facebook"
                 >
-                  Facebook
+                  <i className="fab fa-facebook text-2xl"></i>
+                </a>
+              )}
+              {config.instagram && (
+                <a
+                  href={config.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-eco-light hover:text-eco-mint transition-all duration-300 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <i className="fab fa-instagram text-2xl"></i>
+                </a>
+              )}
+              {config.telegram && (
+                <a
+                  href={`https://t.me/${config.telegram.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-eco-light hover:text-eco-mint transition-all duration-300 hover:scale-110"
+                  aria-label="Telegram для бронювань"
+                  title="Telegram для бронювань екскурсій"
+                >
+                  <i className="fab fa-telegram text-2xl"></i>
                 </a>
               )}
             </div>
+            {config.telegram && (
+              <p className="text-sm text-white/70 mt-3">
+                Telegram для бронювань: {config.telegram}
+              </p>
+            )}
           </div>
 
           {/* About */}

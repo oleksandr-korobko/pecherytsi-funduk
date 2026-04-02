@@ -1,8 +1,9 @@
-import { getHomePageContent } from '@/lib/content';
+import { getHomePageContent, getSiteConfig } from '@/lib/content';
 import { PageContainer, MushroomIcon, HeroSlider } from '@/components/ui/Layout';
 
 export default function HomePage() {
   const content = getHomePageContent();
+  const config = getSiteConfig();
 
   return (
     <>
@@ -304,15 +305,29 @@ export default function HomePage() {
               <div className="space-y-4 text-lg">
                 <p>
                   <i className="fas fa-envelope mr-3 text-eco-mint"></i>
-                  info@yvk.com.ua
+                  {config.email}
                 </p>
                 <p>
                   <i className="fas fa-phone mr-3 text-eco-mint"></i>
-                  +380 XX XXX XX XX
+                  {config.phone}
                 </p>
+                {config.telegram && (
+                  <p>
+                    <i className="fab fa-telegram mr-3 text-eco-mint"></i>
+                    <a
+                      href={`https://t.me/${config.telegram.replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-eco-mint transition-colors"
+                    >
+                      {config.telegram}
+                    </a>
+                    <span className="text-sm text-white/70 ml-2">(бронювання екскурсій)</span>
+                  </p>
+                )}
                 <p>
                   <i className="fas fa-map-marker-alt mr-3 text-eco-mint"></i>
-                  Київська область, 49 км від м. Київ
+                  {config.address}
                 </p>
               </div>
             </div>

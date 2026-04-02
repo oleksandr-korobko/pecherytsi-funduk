@@ -5,6 +5,7 @@ export interface SiteConfig {
   siteDescription: string;
   email: string;
   phone: string;
+  telegram?: string;
   address: string;
   instagram: string;
   facebook?: string;
