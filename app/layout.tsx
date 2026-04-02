@@ -22,6 +22,9 @@ const config = getSiteConfig();
 export const metadata: Metadata = {
   title: config.siteTitle,
   description: config.siteDescription,
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
